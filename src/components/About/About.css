@@ -373,13 +373,6 @@
 }
 
 /* Digital Grid Overlay - Same as Hero */
-.about-image-section .digital-grid {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.3;
-}
-
 .about-image-section .grid-line {
   position: absolute;
   background: linear-gradient(90deg, transparent, #00ffff, transparent);
@@ -1370,11 +1363,12 @@
 }
 
 /* Fix for 1364x648, 1188x576 and similar medium resolutions */
-@media (min-width: 1100px) and (max-width: 1400px) {
+@media (min-width: 1100px) and (max-width: 1500px) {
   .about {
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
+    box-sizing: border-box;
   }
 
   .about-container {
@@ -1392,7 +1386,7 @@
     max-width: 100vw;
     box-sizing: border-box;
     gap: clamp(12px, 1.8vw, 20px);
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.4fr 1.6fr;
   }
 
   .about-image-section {
@@ -1405,13 +1399,13 @@
   }
 
   .about-image-section .image-container {
-    width: clamp(300px, 35vw, 400px);
-    height: clamp(300px, 35vw, 400px);
+    width: clamp(280px, 32vw, 380px);
+    height: clamp(280px, 32vw, 380px);
   }
 
   .about-image-section .image-placeholder {
-    width: clamp(275px, 32.5vw, 375px);
-    height: clamp(275px, 32.5vw, 375px);
+    width: clamp(260px, 30vw, 360px);
+    height: clamp(260px, 30vw, 360px);
   }
 
   .about-text-section {

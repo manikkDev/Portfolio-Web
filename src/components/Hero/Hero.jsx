@@ -133,14 +133,8 @@ const Hero = () => {
                 </div>
                 
                 {/* Digital Grid Overlay */}
-                <div className="digital-grid">
-                  <div className="grid-line horizontal" style={{"--position": "25%"}}></div>
-                  <div className="grid-line horizontal" style={{"--position": "75%"}}></div>
-                  <div className="grid-line vertical" style={{"--position": "30%"}}></div>
-                  <div className="grid-line vertical" style={{"--position": "70%"}}></div>
-                </div>
                 
-
+                
               </div>
             </div>
           </div>

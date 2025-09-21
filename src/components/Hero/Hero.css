@@ -384,13 +384,6 @@
 }
 
 /* Digital Grid Overlay */
-.digital-grid {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.3;
-}
-
 .grid-line {
   position: absolute;
   background: linear-gradient(90deg, transparent, #00ffff, transparent);
@@ -2561,11 +2554,12 @@
   height: clamp(40px, 12vw, 80px);
 }
 /* Fix for 1172x648 and 1188x576 resolutions */
-@media (min-width: 1100px) and (max-width: 1300px) {
+@media (min-width: 1100px) and (max-width: 1500px) {
   .hero {
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
+    box-sizing: border-box;
   }
 
   .hero-container {
@@ -2596,13 +2590,13 @@
   }
 
   .image-container {
-    width: clamp(220px, 26vw, 300px);
-    height: clamp(220px, 26vw, 300px);
+    width: clamp(200px, 24vw, 280px);
+    height: clamp(200px, 24vw, 280px);
   }
 
   .image-placeholder {
-    width: clamp(200px, 24vw, 280px);
-    height: clamp(200px, 24vw, 280px);
+    width: clamp(180px, 22vw, 260px);
+    height: clamp(180px, 22vw, 260px);
   }
 
   .hero-text-section {
