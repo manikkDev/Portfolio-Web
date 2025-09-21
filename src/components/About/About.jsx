@@ -124,11 +124,7 @@ const About = () => {
         {/* Professional Gaming Background */}
         <div className="about-bg">
           <div className="circuit-pattern"></div>
-          <div className="data-streams">
-            <div className="data-stream stream-1"></div>
-            <div className="data-stream stream-2"></div>
-            <div className="data-stream stream-3"></div>
-          </div>
+
           <div className="glitch-overlay"></div>
           <div className="scan-grid"></div>
         </div>

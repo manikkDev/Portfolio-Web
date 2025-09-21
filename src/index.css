@@ -260,6 +260,63 @@ button {
   }
 }
 
+/* Specific fix for 386x586 resolution and similar small screens */
+@media (max-width: 400px) {
+  html {
+    font-size: clamp(12px, 3.5vw, 14px) !important;
+  }
+
+  body {
+    font-size: clamp(0.7rem, 3.5vw, 0.8rem) !important;
+    line-height: 1.3 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Enhanced touch targets for very small screens */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: clamp(6px, 2vw, 10px) clamp(8px, 3vw, 12px);
+    font-size: clamp(0.65rem, 3.5vw, 0.75rem) !important;
+  }
+
+  /* Improved text handling for ultra-small screens */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.2 !important;
+    word-break: break-word !important;
+    font-size: clamp(1rem, 4vw, 1.2rem) !important;
+  }
+
+  p,
+  span,
+  div {
+    word-break: break-word !important;
+    hyphens: auto !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Prevent horizontal overflow */
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Remove conflicting padding that might interfere with component styles */
+  .container,
+  section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 /* Ultra-small screens (320px and below) - Android devices */
 @media (max-width: 320px) {
   html {
@@ -269,7 +326,7 @@ button {
   body {
     font-size: clamp(0.7rem, 4vw, 0.8rem);
     line-height: 1.3;
-    padding: 0 clamp(4px, 2vw, 8px);
+    padding: 0;
   }
 
   /* Enhanced touch targets for very small screens */
@@ -283,12 +340,19 @@ button {
   }
 
   /* Improved text handling for ultra-small screens */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     line-height: 1.2;
     word-break: break-word;
   }
 
-  p, span, div {
+  p,
+  span,
+  div {
     word-break: break-word;
     hyphens: auto;
     overflow-wrap: break-word;
@@ -299,13 +363,37 @@ button {
     max-width: 100%;
     box-sizing: border-box;
   }
+}
 
-  /* Improve spacing for ultra-small screens */
+/* Specific fixes for problematic medium resolutions */
+@media (min-width: 1100px) and (max-width: 1400px) {
+  body {
+    overflow-x: hidden !important;
+  }
+
   .container,
-  section,
+  section {
+    max-width: 100% !important;
+    padding-left: clamp(1rem, 2vw, 2rem) !important;
+    padding-right: clamp(1rem, 2vw, 2rem) !important;
+  }
+
+  /* Ensure text wrapping at these resolutions */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  p,
+  span,
   div {
-    padding-left: clamp(4px, 2vw, 8px);
-    padding-right: clamp(4px, 2vw, 8px);
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
 }
 
@@ -327,7 +415,7 @@ button {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   /* Keep only essential animations on mobile */
   .image-placeholder {
     animation: gradientShift 4s ease-in-out infinite !important;

@@ -10,8 +10,8 @@
   border-bottom: 1px solid transparent;
   border-image: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00, #00ffff) 1;
   transition: all 0.3s ease;
-  height: 70px;
-  padding: 15px 0;
+  height: clamp(50px, 8vw, 70px);
+  padding: clamp(10px, 2vw, 15px) 0;
   position: relative;
   overflow: hidden;
 }
@@ -732,6 +732,23 @@ body.dark .mobile-link:hover {
   /* Ensure proper spacing for mobile menu items */
   .mobile-menu .theme-toggle {
     margin: clamp(var(--spacing-xs), 2vw, var(--spacing-sm)) auto;
+  }
+}
+
+/* Small screens responsive navbar */
+@media (max-width: 400px) {
+  .navbar {
+    height: clamp(40px, 6vw, 50px) !important;
+    padding: clamp(8px, 1.5vw, 12px) 0 !important;
+  }
+  
+  .navbar-container {
+    height: clamp(24px, 4vw, 32px);
+    padding: 0 clamp(8px, 2vw, 16px);
+  }
+  
+  .navbar-logo {
+    font-size: clamp(1rem, 4vw, 1.3rem);
   }
 }
 
