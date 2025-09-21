@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
 import profileImage from '../../assets/manik-image-passport-size.jpg';
 import './Hero.css';
@@ -6,6 +7,8 @@ import './Hero.css';
 const Hero = () => {
   const { theme } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { threshold: 0.1 });
   
   const roles = useMemo(() => [
     'Full Stack Web Developer',
@@ -22,6 +25,65 @@ const Hero = () => {
 
     return () => clearInterval(interval);
   }, [roles]);
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const slideInLeft = {
+    hidden: { x: -100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
+  const slideInRight = {
+    hidden: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
+  const fadeInUp = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const scaleIn = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const floatingAnimation = {
+    animate: {
+      y: [-10, 10, -10],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
 
   const stats = [
     { number: '50+', label: 'Projects Completed' },
@@ -79,20 +141,38 @@ const Hero = () => {
   ];
 
   return (
-    <section className={`hero ${theme}`} id="home">
+    <motion.section 
+      className={`hero ${theme}`} 
+      id="home"
+      ref={ref}
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+    >
       <div className="hero-container">
-        <div className="hero-content">
+        <motion.div className="hero-content" variants={containerVariants}>
           {/* Left Side - Image */}
-          <div className="hero-image-section">
-            <div className="image-container">
+          <motion.div className="hero-image-section" variants={slideInLeft}>
+            <motion.div className="image-container" variants={scaleIn}>
               <div className="image-placeholder">
-                <img src={profileImage} alt="Manikaraj Anburaj" className="profile-image" />
+                <motion.img 
+                  src={profileImage} 
+                  alt="Manikaraj Anburaj" 
+                  className="profile-image"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                />
                 <div className="image-glow"></div>
                 <div className="gaming-overlay"></div>
               </div>
-              <div className="floating-elements">
+              <motion.div className="floating-elements" {...floatingAnimation}>
                 {/* Professional Gaming HUD Elements */}
-                <div className="hud-element terminal-window">
+                <motion.div 
+                  className="hud-element terminal-window"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  transition={{ delay: 1, duration: 0.5 }}
+                >
                   <div className="terminal-header">
                     <div className="terminal-dots">
                       <span></span><span></span><span></span>
@@ -102,18 +182,28 @@ const Hero = () => {
                     <span className="terminal-text">$ npm run dev</span>
                     <div className="cursor-blink"></div>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="hud-element code-panel">
+                <motion.div 
+                  className="hud-element code-panel"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  transition={{ delay: 1.2, duration: 0.5 }}
+                >
                    <div className="code-lines">
                      <div className="code-line">function() {'{'}</div>
                      <div className="code-line">  return magic;</div>
                      <div className="code-line">{'}'}</div>
                    </div>
                    <div className="syntax-highlight"></div>
-                 </div>
+                 </motion.div>
                 
-                <div className="hud-element game-stats">
+                <motion.div 
+                  className="hud-element game-stats"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  transition={{ delay: 1.4, duration: 0.5 }}
+                >
                   <div className="stat-bar">
                     <div className="stat-label">XP</div>
                     <div className="stat-progress">
@@ -121,7 +211,7 @@ const Hero = () => {
                     </div>
                   </div>
                   <div className="level-indicator">LVL 99</div>
-                </div>
+                </motion.div>
                 
                 {/* Interactive Glitch Particles */}
                 <div className="glitch-particles">
@@ -135,18 +225,18 @@ const Hero = () => {
                 {/* Digital Grid Overlay */}
                 
                 
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Side - Content */}
-          <div className="hero-text-section">
+          <motion.div className="hero-text-section" variants={slideInRight}>
             <div className="welcome-text">
-              <h1 className="main-heading">
+              <motion.h1 className="main-heading" variants={fadeInUp}>
                 Welcome to my portfolio
-              </h1>
+              </motion.h1>
               
-              <div className="intro-text-container">
+              <motion.div className="intro-text-container" variants={fadeInUp}>
                  <div className="glitch-intro-wrapper">
                    <div className="single-line-intro">
                      <span className="typing-text" data-text="Hi, I'm ">Hi, I'm </span>
@@ -156,62 +246,88 @@ const Hero = () => {
                      <div className="digital-emoji">😋</div>
                    </div>
                    <div className="role-display">
-                     <span className="role-text glitch-text" data-text={roles[currentIndex]}>
+                     <motion.span 
+                       className="role-text glitch-text" 
+                       data-text={roles[currentIndex]}
+                       key={currentIndex}
+                       initial={{ opacity: 0, y: 20 }}
+                       animate={{ opacity: 1, y: 0 }}
+                       exit={{ opacity: 0, y: -20 }}
+                       transition={{ duration: 0.5 }}
+                     >
                        {roles[currentIndex]}
-                     </span>
+                     </motion.span>
                    </div>
                  </div>
                  <div className="data-corruption-overlay"></div>
                  <div className="matrix-rain"></div>
-               </div>
+               </motion.div>
 
-              <p className="description">
+              <motion.p className="description" variants={fadeInUp}>
                 I am a passionate learner and creative problem solver who thrives on turning innovative ideas into reality. 
                 With expertise spanning web development, game creation, and digital content, I bring a unique blend of 
                 technical skills and creative vision to every project. I'm constantly exploring new technologies and 
                 pushing the boundaries of what's possible in the digital realm.
-              </p>
+              </motion.p>
 
               {/* Stats Buttons */}
-              <div className="stats-container">
+              <motion.div className="stats-container" variants={fadeInUp}>
                 {stats.map((stat, index) => (
-                  <div key={index} className="stat-card">
+                  <motion.div 
+                    key={index} 
+                    className="stat-card"
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <div className="stat-number">{stat.number}</div>
                     <div className="stat-label">{stat.label}</div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
               {/* Action Buttons */}
-              <div className="action-buttons">
-                <button className="btn btn-primary">
+              <motion.div className="action-buttons" variants={fadeInUp}>
+                <motion.button 
+                  className="btn btn-primary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <span className="btn-icon">📧</span>
                   Get in Touch
-                </button>
-                <button className="btn btn-secondary">
+                </motion.button>
+                <motion.button 
+                  className="btn btn-secondary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <span className="btn-icon">📄</span>
                   Download CV
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
 
               {/* Social Links */}
-              <div className="social-links">
+              <motion.div className="social-links" variants={fadeInUp}>
                 {socialLinks.map((social, index) => (
-                  <a 
+                  <motion.a 
                     key={index}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-link gaming-social"
                     title={social.name}
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <span className="social-icon">{social.icon}</span>
-                  </a>
+                  </motion.a>
                 ))}
-              </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Professional Gaming Background */}
         <div className="hero-bg">
@@ -221,7 +337,7 @@ const Hero = () => {
           <div className="scan-grid"></div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
