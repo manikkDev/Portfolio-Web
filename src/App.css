@@ -1,0 +1,121 @@
+/* Portfolio App Styles */
+.App {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Enhanced container constraints for all screen sizes */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal overflow on all elements */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Container utilities for responsive design */
+.container {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 0 clamp(8px, 2vw, 16px);
+  box-sizing: border-box;
+}
+
+/* Responsive container sizes */
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+/* Prevent content from breaking layout */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Text overflow handling */
+p, span, div, h1, h2, h3, h4, h5, h6 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Ultra-small screen constraints */
+@media (max-width: 320px) {
+  .App {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .container {
+    padding: 0 clamp(4px, 2vw, 8px);
+  }
+  
+  /* Ensure all elements respect viewport width */
+  * {
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Prevent any element from causing horizontal scroll */
+  body > * {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}
+
+
+
+/* Selection styles */
+::selection {
+  background: var(--accent-primary);
+  color: white;
+}
+
+body.dark ::selection {
+  background: var(--accent-primary-dark);
+  color: white;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+body.dark *:focus {
+  outline-color: var(--accent-primary-dark);
+}
