@@ -2305,11 +2305,12 @@
     max-width: 100%;
   }
 
-  /* Disable floating animations for better performance */
+  /* Adjust floating elements for smaller screens */
   .hud-element {
     animation: none !important;
-    position: static;
-    display: none;
+    position: absolute;
+    opacity: 0.7;
+    transform: scale(0.8);
   }
 
   .image-glow {
@@ -2797,9 +2798,10 @@
     line-height: 1.3 !important;
   }
 
-  /* Hide or minimize floating elements to prevent overflow */
+  /* Adjust floating elements for very small screens */
   .hud-element {
-    display: none !important;
+    opacity: 0.5;
+    transform: scale(0.6);
   }
 
   .terminal-window,
