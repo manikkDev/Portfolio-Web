@@ -2236,6 +2236,74 @@
   }
 }
 
+/* Fix horizontal overflow and performance issues for mobile */
+@media (max-width: 400px) {
+  .hero {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .hero-container {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: clamp(8px, 2vw, 12px);
+  }
+
+  .hero-content {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    gap: clamp(12px, 3vw, 16px);
+  }
+
+  /* Reduce floating animations for better performance */
+  .hud-element {
+    animation: none;
+  }
+
+  .image-placeholder {
+    animation: float 6s ease-in-out infinite, gradientShift 4s ease-in-out infinite;
+  }
+
+  .image-glow {
+    animation: none;
+    opacity: 0.2;
+  }
+
+  .gaming-overlay {
+    animation: none;
+    opacity: 0.1;
+  }
+
+  .glitch-particle {
+    display: none; /* Hide for performance */
+  }
+
+  .hologram-ring {
+    animation: none;
+  }
+
+  /* Ensure text doesn't overflow */
+  .hero-text-section {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .welcome-text,
+  .name-text,
+  .role-text,
+  .description-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+}
+
 /* Ultra-small screens (320px and below) - Enhanced mobile support */
 @media (max-width: 320px) {
   .hero {

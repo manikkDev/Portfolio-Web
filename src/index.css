@@ -317,8 +317,8 @@ button {
   }
 }
 
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
+/* Reduce motion for accessibility and performance on mobile */
+@media (prefers-reduced-motion: reduce), (max-width: 480px) {
   *,
   *::before,
   *::after {
@@ -326,5 +326,10 @@ button {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  /* Keep only essential animations on mobile */
+  .image-placeholder {
+    animation: gradientShift 4s ease-in-out infinite !important;
   }
 }
